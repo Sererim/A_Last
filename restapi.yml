@@ -1,0 +1,569 @@
+openapi: 3.0.1
+info:
+  title: Получение информации о сервере.
+  version: 0.1.0
+servers:
+  - url: http://localhost:8080/api/v1
+paths:
+  /robots:
+    get:
+      summary: Метод получения списка роботов.
+      security:
+        - BearerAuth: []
+      tags: 
+        - Robots
+      operationId: getAllRobots
+      responses:
+        "200":
+          description: Успешный ответ со спиcком серверов.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robots"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления нового робота в список.
+      security:
+        - BearerAuth: []
+      tags: 
+        - Robots
+      operationId: addRobot
+      requestBody:
+        required: true
+        content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robot" 
+      responses:
+        "200":
+          description: Усшный ответ добавления нового робота.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robot"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /robots/{idRobot}:
+    get:
+      summary: Метод получения роботa по id.
+      security:
+        - BearerAuth: []
+      tags:
+        - Robots
+      operationId: getRobotById
+      parameters:
+        - name: idRobot
+          in: path
+          required: true
+          description: id Robot
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Усшный ответ получения сервера по id.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robot"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Метод для обновления робота по id.
+      security:
+        - BearerAuth: []
+      tags:
+        - Robots
+      operationId: updateRobotById
+      parameters:
+        - name: idRobot
+          in: path
+          required: true
+          description: id Robot
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Усшный ответ обновления робота по id.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Robot"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Удаление робота по id.
+      security:
+        - BearerAuth: []
+      tags:
+        - Robots
+      operationId: deleteRobotById
+      parameters:
+        - name: idRobot
+          in: path
+          required: true
+          description: id Robot
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Успешное удаление робота по id
+          content:
+            adplication/json: {}
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /schedules:
+    get:
+      summary: Получения всего списка расписаний.
+      security:
+        - BearerAuth: []
+      tags:
+        - Schedules
+      operationId: getAllSchedules
+      responses:
+        "200":
+          description: Успешный ответ со спиcком расписаний.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Schedules"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Добавление расписания.
+      security:
+        - BearerAuth: []
+      tags:
+        - Schedules
+      operationId: addSchedule
+      requestBody:
+        required: true
+        content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Schedule" 
+      responses:
+        "200":
+          description: Усшный ответ добавления нового расписания.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Schedule"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /schedules/{idSchedule}:
+    get:
+      summary: Метод получения расписания по id.
+      security:
+        - BearerAuth: []
+      tags:
+        - Robots
+      operationId: getScheduleById
+      parameters:
+        - name: idSchedule
+          in: path
+          required: true
+          description: id Schedule
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Усшный ответ получения сервера по id.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Schedule"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    put:
+      summary: Метод для обновления расписания по id.
+      security:
+        - BearerAuth: []
+      tags:
+        - Schedules
+      operationId: updateScheduleById
+      parameters:
+        - name: idSchedule
+          in: path
+          required: true
+          description: id Schedule
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Усшный ответ обновления расписания по id.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Schedule"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Удаление расписания по id.
+      security:
+        - BearerAuth: []
+      tags:
+        - Schedules
+      operationId: deleteScheduleById
+      parameters:
+        - name: idSchedule
+          in: path
+          required: true
+          description: id Schedule
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Успешное удаление расписания по id
+          content:
+            adplication/json: {}
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /users:
+    get:
+      summary: Получения всего списка пользователей.
+      security:
+        - BearerAuth: []
+      tags:
+        - Users
+      operationId: getAllUsers
+      responses:
+        "200":
+          description: Успешный ответ со спиcком пользователей.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Users"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Добавление пользователя.
+      security:
+        - BearerAuth: []
+      tags:
+        - Users
+      operationId: addUser
+      requestBody:
+        required: true
+        content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/User" 
+      responses:
+        "200":
+          description: Усшный ответ добавления нового пользователя.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Schedule"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /users/{idUser}:
+    put:
+      summary: Метод для обновления пользователя по id.
+      security:
+        - BearerAuth: []
+      tags:
+        - Users
+      operationId: updateUserById
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          description: id User
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Усшный ответ обновления пользователя по id.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      summary: Удаление пользователя по id.
+      security:
+        - BearerAuth: []
+      tags:
+        - Users
+      operationId: deleteUserById
+      parameters:
+        - name: idUser
+          in: path
+          required: true
+          description: id User
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Успешное удаление пользователя по id
+          content:
+            adplication/json: {}
+        "400":
+          description: Неправильный запрос.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Внутренняя ошибка сервера.
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Robot:
+      type: object
+      required:
+        - idRobot
+        - model
+        - fabricNumber
+        - version
+        - status
+        - resources
+      properties:
+        idRobot:
+          type: integer 
+          example: 1
+          description: Id робота.
+        model:
+          type: string
+          example: "super cleaner 9000"
+          description: Модель робота.
+        fabricNumber:
+          type: string
+          example: "1V2223"
+          description: Заводской номер.
+        version:
+          type: string
+          example: "pro max"
+          description: Версия робота.
+        status:
+          type: string
+          enum:
+            - working
+            - charging
+            - waiting
+            - internal problem
+            - program problem
+            - external problem
+            - obstacle
+          description: Статус робота.
+        resources:
+          type: integer
+          example: 10
+          description: Ресурсы робота.
+    Robots:
+      type: array
+      items:
+        $ref: "#/components/schemas/Robot"
+    Error:
+      type: object
+      required:
+        - codeError
+        - messageError
+      properties:
+        codeError:
+          type: string
+          example: 123f456
+          description: Код ошибки
+        messageError:
+          type: string
+          example: error
+          description: Сообщение ошибки
+    Schedule:
+      type: object
+      required:
+        - idSchedule
+        - idRobot
+        - dateTime
+        - location
+        - mode
+      properties:
+        idSchedule:
+          type: integer
+          description: Id расписания.
+        idRobot:
+          type: integer
+          description: Id робота.
+        dateTime:
+          type: string
+          format: date
+          description: Расписание работы.
+        location:
+          type: integer
+          description: Место работы.
+        mode:
+          type: string
+          enum:
+           - cleaning
+           - vacum
+           - full
+          description: Режим работы.
+    Schedules:
+      type: array
+      items:
+        $ref: "#/components/schemas/Schedule"
+    User:
+      type: object
+      required:
+        - idUser
+        - login
+        - hashPassword
+      properties:
+        idUser:
+          type: integer
+        login:
+          type: string
+        hashPassword:
+         type: string
+         description: Пароль пользователя переведенный в 16-разрядную систему и занифрованный.
+    Users:
+      type: array
+      items:
+        $ref: "#/components/schemas/User"
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+
+    

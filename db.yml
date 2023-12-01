@@ -1,0 +1,32 @@
+Robot {
+    id integer pk increments
+    model string
+    fabricNumber string
+    version string
+    status enum
+    resources integer
+    macAddress macaddr
+    idGroupUser integer *> GroupUser.id
+    comment text
+}
+
+GroupUser {
+    id integer pk increments
+    idUser1 integer > User.id
+    idUser2 integer > User.id
+    idUser3 integer > User.id
+}
+
+User {
+    id integer pk increments
+    login unique string
+    hashPassword
+}
+
+Schedule {
+    id integer pk increments
+    idRobot integer > Robot.id
+    dateTime datetime
+    location integer
+    mode enum
+}
